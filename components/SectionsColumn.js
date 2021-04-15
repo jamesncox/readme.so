@@ -102,7 +102,7 @@ export const SectionsColumn = ({
             type="button"
             onClick={(e) => onAddSection(e, customSectionSlug)}
           >
-            <span>{'Custom'}</span>
+            <span>{getTemplate('custom').name}</span>
           </button>
           {alphabetizedSectionSlugs.map((s) => (
             <li key={s}>
