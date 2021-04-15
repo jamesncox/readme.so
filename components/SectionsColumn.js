@@ -57,7 +57,9 @@ export const SectionsColumn = ({
     setFocusedSectionSlug(null)
   }
 
-  const alphabetizedSectionSlugs = sectionSlugs.sort()
+  const sectionSlugsExceptCustom = sectionSlugs.filter((s) => s !== 'custom')
+  const alphabetizedSectionSlugs = sectionSlugsExceptCustom.sort()
+  const customSectionSlug = sectionSlugs.filter((s) => s === 'custom')
 
   return (
     <div className="sections">
@@ -95,6 +97,13 @@ export const SectionsColumn = ({
           </h4>
         )}
         <ul className="mb-12 space-y-3">
+          <button
+            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 w-full h-full flex items-center py-2 pl-3 pr-6 bg-white rounded-md shadow cursor-pointer block"
+            type="button"
+            onClick={(e) => onAddSection(e, customSectionSlug)}
+          >
+            <span>{'Custom'}</span>
+          </button>
           {alphabetizedSectionSlugs.map((s) => (
             <li key={s}>
               <button
