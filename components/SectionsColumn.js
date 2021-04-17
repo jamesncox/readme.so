@@ -13,6 +13,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
+import { sectionTemplates } from '../data/section-templates'
 
 import { SortableItem } from './SortableItem'
 
@@ -24,6 +25,7 @@ export const SectionsColumn = ({
   setFocusedSectionSlug,
   focusedSectionSlug,
   getTemplate,
+  setTemplates,
 }) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -36,6 +38,20 @@ export const SectionsColumn = ({
     setSectionSlugs((prev) => prev.filter((s) => s !== section))
     setSelectedSectionSlugs((prev) => [...prev, section])
     setFocusedSectionSlug(section)
+  }
+
+  const addCustomSection = () => {
+    const newSection = {
+      slug: `${Date.now()}`,
+      name: 'Custom',
+      markdown: `
+  ## Custom
+  
+    `,
+    }
+    setTemplates((prev) => [...prev, newSection])
+    setSelectedSectionSlugs((prev) => [...prev, newSection.slug])
+    setFocusedSectionSlug(newSection.slug)
   }
 
   const handleDragEnd = (event) => {
@@ -58,8 +74,16 @@ export const SectionsColumn = ({
   }
 
   const sectionSlugsExceptCustom = sectionSlugs.filter((s) => s !== 'custom')
-  const alphabetizedSectionSlugs = sectionSlugsExceptCustom.sort()
-  const customSectionSlug = sectionSlugs.filter((s) => s === 'custom')
+  const alphabetizedSectionSlugs = sectionSlugsExceptCustom.sort((a, b) => {
+    const aTitle = getTemplate(a).title
+    const bTitle = getTemplate(b).title
+    if (aTitle < bTitle) {
+      return -1
+    } else {
+      return 1
+    }
+  })
+  // const customSectionSlug = sectionSlugs.filter((s) => s === 'custom')
 
   return (
     <div className="sections">
@@ -98,11 +122,11 @@ export const SectionsColumn = ({
         )}
         <ul className="mb-12 space-y-3">
           <button
-            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 w-full h-full flex items-center py-2 pl-3 pr-6 bg-white rounded-md shadow cursor-pointer block"
+            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 w-full h-full flex items-center py-2 pl-3 pr-6 bg-emerald-400 text-white rounded-md shadow cursor-pointer block"
             type="button"
-            onClick={(e) => onAddSection(e, customSectionSlug)}
+            onClick={addCustomSection}
           >
-            <span>{getTemplate('custom').name}</span>
+            <span>{'Custom'}</span>
           </button>
           {alphabetizedSectionSlugs.map((s) => (
             <li key={s}>

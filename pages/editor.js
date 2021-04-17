@@ -82,6 +82,7 @@ export default function Editor() {
               setFocusedSectionSlug={setFocusedSectionSlug}
               focusedSectionSlug={focusedSectionSlug}
               getTemplate={getTemplate}
+              setTemplates={setTemplates}
             />
             <div className="flex flex-1">
               <EditorColumn

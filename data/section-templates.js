@@ -359,12 +359,4 @@ Any additional information goes here
 
   `,
   },
-  {
-    slug: 'custom',
-    name: 'Custom',
-    markdown: `
-## Custom
-
-  `,
-  },
 ]
