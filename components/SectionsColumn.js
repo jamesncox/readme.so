@@ -73,17 +73,17 @@ export const SectionsColumn = ({
     setFocusedSectionSlug(null)
   }
 
-  const sectionSlugsExceptCustom = sectionSlugs.filter((s) => s !== 'custom')
-  const alphabetizedSectionSlugs = sectionSlugsExceptCustom.sort((a, b) => {
-    const aTitle = getTemplate(a).title
-    const bTitle = getTemplate(b).title
+  const alphabetizedSectionSlugs = sectionSlugs.sort((a, b) => {
+    const aTitle = getTemplate(a).name
+    const bTitle = getTemplate(b).name
     if (aTitle < bTitle) {
       return -1
     } else {
       return 1
     }
   })
-  // const customSectionSlug = sectionSlugs.filter((s) => s === 'custom')
+
+  // const alphabetizedSectionSlugs = sectionSlugs.sort()
 
   return (
     <div className="sections">
