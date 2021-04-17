@@ -13,7 +13,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import { sectionTemplates } from '../data/section-templates'
+// import { sectionTemplates } from '../data/section-templates'
 
 import { SortableItem } from './SortableItem'
 

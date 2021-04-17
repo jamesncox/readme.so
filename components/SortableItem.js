@@ -41,7 +41,11 @@ export function SortableItem(props) {
       >
         <img className="w-5 h-5" src="drag.svg" />
       </button>
-      <p>{props.section.name}</p>
+      {props.section.name === 'Custom' ? (
+        <p contentEditable="true">{props.section.name}</p>
+      ) : (
+        <p>{props.section.name}</p>
+      )}
       {props.section.slug === props.focusedSectionSlug && (
         <button
           className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 absolute right-2"
